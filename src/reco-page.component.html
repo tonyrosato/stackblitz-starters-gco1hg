@@ -1,0 +1,26 @@
+<span class="d-block">
+  {{ 'reco.side-panel.call-us-part1' | translate }}
+  <a
+    #phoneNumber
+    class="link-simple-alternate"
+    [appAnalyticsEvent]="generatePhoneNumberEventObject(phoneNumber)"
+    [attr.href]="'tel:' + ('reco.side-panel.phone-number' | translate)"
+    data-testid="explore-options-phone-number"
+    >{{ 'reco.side-panel.phone-number' | translate }}</a
+  >
+  {{ 'reco.side-panel.call-us-part2' | translate }}
+</span>
+<p [innerHTML]="'reco.side-panel.business-hours' | translate"></p>
+<a
+  #writeToUs
+  class="clickable-block"
+  target="_blank"
+  [appAnalyticsEvent]="generateWriteToUsEventObject(writeToUs)"
+  [attr.href]="'reco.side-panel.write-us-link' | translate"
+  data-testid="explore-options-write-us"
+>
+  <span
+    class="link-simple-alternate"
+    [innerHTML]="'reco.side-panel.write-us' | translate"
+  ></span>
+</a>

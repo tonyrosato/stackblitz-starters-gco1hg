@@ -1,0 +1,104 @@
+## Connecting to Your AWS Sandbox via AWS CLI
+
+### Step 1: Installing the AWS CLI
+
+#### For Windows:
+1. Download the AWS CLI MSI installer for Windows (64-bit) using the following link: [https://awscli.amazonaws.com/AWSCLIV2.msi](https://awscli.amazonaws.com/AWSCLIV2.msi)
+2. Run the downloaded file to install the AWS CLI.
+3. To confirm the installation, open the Start menu, search for `cmd` to open a command prompt window. In the command prompt, type:
+   ```
+   aws --version
+   ```
+
+#### For Linux:
+1. Use the following command to download and install the AWS CLI:
+   ```
+   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+   unzip awscliv2.zip
+   sudo ./aws/install
+   ```
+2. Confirm the installation by typing:
+   ```
+   aws --version
+   ```
+
+### Step 2: Configuring the AWS CLI
+
+1. Open a command prompt or terminal and type the following command to ensure the presence of the `.aws` directory and its files:
+
+   **Windows:**
+   ```
+   dir %USERPROFILE%\.aws
+   ```
+
+   **Linux:**
+   ```
+   ls ~/.aws
+   ```
+
+2. To configure your AWS profile:
+
+   **Windows:**
+   ```
+   notepad %USERPROFILE%\.aws\config
+   ```
+
+   **Linux:**
+   ```
+   nano ~/.aws/config
+   ```
+
+   Then add the following details to the file:
+   ```
+   [profile XXXYYYZZZ]
+   sso_start_url = https://d-9d671bee9a.awsapps.com/start#/
+   sso_region = ca-central-1
+   sso_account_id = 294730062217
+   sso_role_name = BDCPOCReadOnly
+   region = ca-central-1
+   output = json
+   ```
+
+3. To verify your configuration, type:
+
+   **Windows & Linux:**
+   ```
+   aws configure list
+   ```
+
+   You should see an output similar to this:
+   ```
+      Name                    Value             Type    Location
+      ----                    -----             ----    --------
+   profile                XXXYYYZZZ              env    ['AWS_PROFILE', 'AWS_DEFAULT_PROFILE']
+   access_key     ****************4E7B              sso
+   secret_key     ****************hI5e              sso
+       region             ca-central-1      config-file    ~/.aws/config
+   ```
+
+### Step 3: Logging into AWS SSO
+
+1. Type the following command to log in to AWS SSO:
+
+   **Windows & Linux:**
+   ```
+   aws sso login
+   ```
+
+### Step 4: Listing EKS Clusters
+
+1. To list your EKS clusters, type:
+
+   **Windows & Linux:**
+   ```
+   aws eks list-clusters
+   ```
+
+   You should see an output similar to this:
+   ```
+   {
+       "clusters": [
+           "forgerock-playground"
+       ]
+   }
+   ```
